@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brett Martin | Operations, Systems & Risk Leader</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --ink: #0A0E1A;
+  --ink2: #141826;
+  --navy: #1B3A6B;
+  --blue: #2E75B6;
+  --blue-light: #5B9BD5;
+  --cream: #F7F4EE;
+  --warm-gray: #EAE6DF;
+  --mid: #8A8A8A;
+  --border: #E0DBD2;
+  --green: #3D9970;
+  --gold: #C9A84C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: auto;
+}
+
+html.custom-cursor-enabled body {
+  cursor: none;
+}
+
+/* CURSOR */
+.cur {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+}
+html.custom-cursor-enabled .cur {
+  display: block;
+}
+#cdot {
+  width: 8px;
+  height: 8px;
+  background: var(--blue);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width .15s, height .15s, opacity .15s;
+  opacity: 1;
+}
+#cring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .42;
+  transition: width .25s, height .25s, opacity .25s;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  padding: 22px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all .35s ease;
+}
+nav.scrolled {
+  background: rgba(247, 244, 238, .94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 60px;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.nav-monogram {
+  width: 36px;
+  height: 36px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: .85rem;
+  color: white;
+  letter-spacing: .02em;
+}
+.nav-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  color: var(--navy);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .62rem;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color .2s ease;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-resume {
+  padding: 8px 20px;
+  border: 1px solid var(--navy);
+  color: var(--navy) !important;
+  transition: all .2s ease !important;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem !important;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.nav-resume:hover {
+  background: var(--navy);
+  color: white !important;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 56px 72px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 30% 40%, rgba(46,117,182,.12), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-photo-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-photo-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: .22;
+  filter: grayscale(100%) contrast(1.1);
+  display: block;
+}
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,14,26,.15) 0%,
+    rgba(10,14,26,.26) 28%,
+    rgba(10,14,26,.50) 55%,
+    rgba(10,14,26,.88) 100%
+  );
+}
+.hero-left-content {
+  position: relative;
+  z-index: 3;
+}
+.hero-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.avail-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.4); }
+}
+.avail-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  line-height: .92;
+  letter-spacing: -.02em;
+  margin-bottom: 28px;
+}
+.hero-name .fn {
+  display: block;
+  font-size: clamp(4.5rem, 7vw, 7.5rem);
+  color: rgba(255,255,255,.92);
+}
+.hero-name .ln {
+  display: block;
+  font-size: clamp(4.5rem, 7vw, 7.5rem);
+  color: var(--blue-light);
+  font-style: italic;
+}
+.hero-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--blue), transparent);
+  margin-bottom: 28px;
+}
+.hero-tagline {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,.46);
+  line-height: 1.7;
+  max-width: 460px;
+  letter-spacing: .01em;
+}
+.hero-location {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: rgba(255,255,255,.22);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+.hero-right {
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 56px 80px 60px;
+  position: relative;
+}
+.hero-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 24px;
+}
+.hero-photo-portrait-wrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 4px 30px rgba(27,58,107,.15);
+  flex-shrink: 0;
+  background: #e9e5dd;
+}
+.hero-photo-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.hero-right-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .58rem;
+  color: var(--blue);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  color: var(--navy);
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--blue);
+}
+.hero-summary {
+  font-size: .9rem;
+  line-height: 1.85;
+  color: #555;
+  margin-bottom: 28px;
+  border-left: 2px solid var(--blue);
+  padding-left: 18px;
+  max-width: 620px;
+}
+
+.impact-block {
+  margin-top: 0;
+  margin-bottom: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  max-width: 520px;
+}
+.impact-row {
+  display: flex;
+  flex-direction: column;
+}
+.impact-number {
+  font-size: 1.7rem;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.impact-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .62rem;
+  color: #777;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.45;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn,
+.c-btn {
+  padding: 13px 26px;
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .61rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .22s ease;
+  border: 1px solid;
+}
+.btn-primary,
+.c-btn.primary {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+.btn-primary:hover,
+.c-btn.primary:hover {
+  background: transparent;
+  color: var(--navy);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--blue);
+  border-color: var(--blue);
+}
+.btn-ghost:hover {
+  background: var(--blue);
+  color: white;
+}
+.btn-outline,
+.c-btn.ghost {
+  background: transparent;
+  color: var(--mid);
+  border-color: var(--border);
+}
+.btn-outline:hover,
+.c-btn.ghost:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.credibility {
+  margin-top: 16px;
+  font-size: .78rem;
+  line-height: 1.6;
+  color: #8b8b8b;
+  max-width: 580px;
+}
+
+/* TICKER */
+.ticker {
+  background: var(--navy);
+  padding: 13px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex;
+  min-width: max-content;
+  animation: tick 36s linear infinite;
+}
+.ticker-item {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: rgba(255,255,255,.32);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: 0 36px;
+}
+.ticker-item b {
+  color: var(--blue-light);
+  margin-right: 6px;
+}
+@keyframes tick {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* NUMBERS */
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: var(--ink2);
+}
+.num-cell {
+  padding: 44px 36px;
+  border-right: 1px solid rgba(255,255,255,.04);
+  position: relative;
+  overflow: hidden;
+  transition: background .3s ease;
+}
+.num-cell:last-child { border-right: none; }
+.num-cell:hover { background: rgba(255,255,255,.025); }
+.num-cell::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s;
+}
+.num-cell:hover::after { transform: scaleX(1); }
+.num-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: white;
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.num-val span { color: var(--blue-light); }
+.num-lbl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .58rem;
+  color: rgba(255,255,255,.28);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1.65;
+}
+
+/* SECTIONS */
+section { scroll-margin-top: 90px; }
+.section-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: var(--blue);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+.section-rule {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 72px;
+}
+
+/* EXPERIENCE */
+#experience {
+  background: var(--ink);
+  padding: 100px 60px;
+}
+#experience .section-eyebrow { color: var(--blue-light); }
+#experience .section-title { color: rgba(255,255,255,.92); }
+#experience .section-rule { background: rgba(255,255,255,.07); }
+
+.exp-grid { display: grid; gap: 0; }
+.exp-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 48px 0;
+  position: relative;
+  transition: all .3s ease;
+}
+.exp-row:last-child { border-bottom: 1px solid rgba(255,255,255,.05); }
+.exp-row::before {
+  content: '';
+  position: absolute;
+  left: -60px;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, rgba(46,117,182,.06), transparent);
+  transition: width .5s cubic-bezier(.16,1,.3,1);
+}
+.exp-row:hover::before { width: calc(100% + 120px); }
+.exp-left {
+  padding-right: 32px;
+  padding-top: 4px;
+}
+.exp-period {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: rgba(255,255,255,.25);
+  letter-spacing: .07em;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.exp-company {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .62rem;
+  color: var(--blue-light);
+  letter-spacing: .08em;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.exp-loc-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .56rem;
+  color: rgba(255,255,255,.2);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.exp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: rgba(255,255,255,.92);
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+.exp-desc {
+  font-size: .88rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,.42);
+  margin-bottom: 22px;
+  max-width: 700px;
+}
+.exp-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.exp-hl {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: .83rem;
+  color: rgba(255,255,255,.56);
+  line-height: 1.55;
+}
+.exp-hl::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--blue);
+  flex-shrink: 0;
+  margin-top: 10px;
+}
+.exp-hl strong {
+  color: rgba(255,255,255,.82);
+  font-weight: 500;
+}
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .56rem;
+  color: rgba(255,255,255,.27);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 4px 11px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  transition: all .2s ease;
+}
+.exp-row:hover .tag {
+  border-color: rgba(255,255,255,.14);
+  color: rgba(255,255,255,.42);
+}
+
+/* PROJECTS */
+#projects {
+  background: var(--cream);
+  padding: 100px 60px;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border);
+}
+.proj-card {
+  background: var(--cream);
+  padding: 52px 48px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.proj-card:hover { background: white; }
+.proj-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.proj-card:hover .proj-bar { transform: scaleX(1); }
+.proj-index {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .58rem;
+  color: var(--blue);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.proj-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: border-color .2s ease;
+}
+.proj-card:hover .proj-icon-wrap { border-color: var(--navy); }
+.proj-icon-svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--navy);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.proj-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  color: var(--navy);
+  letter-spacing: -.02em;
+  margin-bottom: 6px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+.proj-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: var(--blue);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.proj-desc {
+  font-size: .86rem;
+  line-height: 1.82;
+  color: #666;
+  margin-bottom: 24px;
+}
+.proj-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.pm {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .8rem;
+  color: #777;
+  line-height: 1.45;
+}
+.pm::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--blue-light);
+  flex-shrink: 0;
+  margin-top: 9px;
+}
+
+/* SKILLS */
+#skills {
+  background: var(--ink2);
+  padding: 100px 60px;
+}
+#skills .section-title { color: rgba(255,255,255,.92); }
+#skills .section-rule { background: rgba(255,255,255,.06); }
+#skills .section-eyebrow { color: var(--blue-light); }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,.04);
+}
+.skill-col {
+  background: var(--ink2);
+  padding: 44px 36px;
+  transition: background .2s ease;
+}
+.skill-col:hover { background: rgba(255,255,255,.02); }
+.skill-col-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .62rem;
+  color: var(--blue-light);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.skill-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: .84rem;
+  color: rgba(255,255,255,.42);
+  line-height: 1.45;
+  transition: color .2s ease;
+}
+.skill-list li::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: rgba(255,255,255,.12);
+  flex-shrink: 0;
+  margin-top: 10px;
+  transition: background .2s, width .2s;
+}
+.skill-col:hover .skill-list li { color: rgba(255,255,255,.57); }
+.skill-col:hover .skill-list li::before {
+  background: var(--blue-light);
+  width: 20px;
+}
+
+/* CONTACT */
+#contact {
+  background: var(--cream);
+  padding: 120px 60px;
+  position: relative;
+  overflow: hidden;
+}
+#contact::before {
+  content: 'BM';
+  position: absolute;
+  right: -1%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 30vw;
+  color: rgba(27,58,107,.04);
+  pointer-events: none;
+  letter-spacing: -.06em;
+  line-height: 1;
+  font-style: italic;
+}
+.contact-wrap {
+  max-width: 760px;
+  position: relative;
+  z-index: 2;
+}
+.contact-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: var(--blue);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+.contact-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  color: var(--navy);
+  letter-spacing: -.04em;
+  line-height: .95;
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.contact-h em {
+  font-style: italic;
+  color: var(--blue);
+}
+.contact-body {
+  font-size: .92rem;
+  color: #666;
+  line-height: 1.85;
+  margin-bottom: 52px;
+  max-width: 560px;
+}
+.contact-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 22px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.foot-l,
+.foot-r {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .58rem;
+  color: rgba(255,255,255,.22);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reliable fallback: sections are visible by default */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+}
+html.js .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; }
+.d4 { transition-delay: .4s; }
+
+.h-a1 { opacity: 0; animation: fadeUp .6s ease forwards .15s; }
+.h-a2 { opacity: 0; animation: fadeUp .7s ease forwards .3s; }
+.h-a3 { opacity: 0; animation: fadeUp .6s ease forwards .45s; }
+.h-a4 { opacity: 0; animation: fadeUp .6s ease forwards .58s; }
+.h-a5 { opacity: 0; animation: fadeUp .6s ease forwards .7s; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--blue); }
+
+@media (hover: none), (pointer: coarse) {
+  html.custom-cursor-enabled body {
+    cursor: auto;
+  }
+  .cur { display: none !important; }
+}
+
+@media (max-width: 1080px) {
+  .hero-profile-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 960px) {
+  nav,
+  nav.scrolled { padding: 16px 24px; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-left {
+    min-height: 72vh;
+    padding: 80px 24px 60px;
+  }
+  .hero-right { padding: 56px 24px; }
+
+  .numbers { grid-template-columns: repeat(3, 1fr); }
+
+  #experience,
+  #projects,
+  #skills,
+  #contact { padding: 72px 24px; }
+
+  .exp-row { grid-template-columns: 1fr; gap: 12px; }
+  .projects-grid,
+  .skills-grid { grid-template-columns: 1fr; }
+
+  footer {
+    padding: 18px 24px;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .numbers { grid-template-columns: 1fr 1fr; }
+  .hero-cta { flex-direction: column; }
+  .contact-row { flex-direction: column; }
+  .impact-block { grid-template-columns: 1fr; }
+}
+
+/* MOBILE POLISH */
+@media (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero-left {
+    min-height: 62vh;
+    padding: 88px 20px 40px;
+  }
+
+  .hero-right {
+    padding: 40px 20px 56px;
+  }
+
+  .hero-name .fn,
+  .hero-name .ln {
+    font-size: clamp(3.2rem, 13vw, 4.6rem);
+    line-height: .95;
+  }
+
+  .hero-tagline {
+    font-size: .92rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .hero-profile-row {
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .hero-photo-portrait-wrap {
+    width: 92px;
+    height: 92px;
+  }
+
+  .hero-headline {
+    font-size: 1.28rem;
+    line-height: 1.22;
+    margin-bottom: 18px;
+  }
+
+  .hero-summary {
+    font-size: .84rem;
+    line-height: 1.72;
+    padding-left: 14px;
+    margin-bottom: 22px;
+  }
+
+  .impact-block {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .impact-number {
+    font-size: 1.35rem;
+  }
+
+  .impact-label {
+    font-size: .54rem;
+    line-height: 1.35;
+  }
+
+  .hero-cta {
+    gap: 10px;
+  }
+
+  .btn,
+  .c-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 18px;
+  }
+
+  .credibility {
+    font-size: .72rem;
+    line-height: 1.5;
+    margin-top: 14px;
+  }
+
+  .ticker {
+    padding: 10px 0;
+  }
+
+  .ticker-item {
+    font-size: .52rem;
+    padding: 0 22px;
+    letter-spacing: .12em;
+  }
+
+  .numbers {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .num-cell {
+    padding: 28px 20px;
+  }
+
+  .num-val {
+    font-size: 1.65rem;
+  }
+
+  .num-lbl {
+    font-size: .52rem;
+    line-height: 1.5;
+  }
+
+  #experience,
+  #projects,
+  #skills,
+  #contact {
+    padding: 60px 20px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .section-rule {
+    margin-bottom: 40px;
+  }
+
+  .exp-row {
+    padding: 28px 0;
+  }
+
+  .exp-left {
+    padding-right: 0;
+    margin-bottom: 6px;
+  }
+
+  .exp-period,
+  .exp-company,
+  .exp-loc-tag {
+    line-height: 1.5;
+  }
+
+  .exp-title {
+    font-size: 1.22rem;
+    line-height: 1.18;
+    margin-bottom: 12px;
+  }
+
+  .exp-desc {
+    font-size: .82rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .exp-highlights {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .exp-hl {
+    display: block;
+    position: relative;
+    padding-left: 18px;
+    font-size: .77rem;
+    line-height: 1.56;
+  }
+
+  .exp-hl::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .8em;
+    width: 10px;
+    height: 1px;
+    background: var(--blue);
+    margin-top: 0;
+  }
+
+  .tag {
+    font-size: .5rem;
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+
+  .exp-tags {
+    gap: 8px 6px;
+  }
+
+  .proj-card {
+    padding: 34px 24px;
+  }
+
+  .proj-title {
+    font-size: 1.28rem;
+  }
+
+  .proj-desc {
+    font-size: .82rem;
+    line-height: 1.7;
+  }
+
+  .pm {
+    font-size: .76rem;
+    line-height: 1.4;
+  }
+
+  .skill-col {
+    padding: 32px 24px;
+  }
+
+  .skill-list li {
+    font-size: .8rem;
+    line-height: 1.4;
+  }
+
+  .contact-h {
+    font-size: 2.45rem;
+    line-height: .95;
+  }
+
+  .contact-body {
+    font-size: .84rem;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  footer {
+    padding: 18px 20px;
+    text-align: center;
+  }
+
+  .foot-l,
+  .foot-r {
+    font-size: .5rem;
+    line-height: 1.5;
+  }
+}
+  
+</style>
+</head>
+<body>
+
+<div class="cur" id="cdot"></div>
+<div class="cur" id="cring"></div>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <div class="nav-monogram">BM</div>
+    <span class="nav-name">Brett Martin</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Capabilities</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <a href="Brett_Martin_Resume.pdf" download class="nav-resume">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7,10 12,15 17,10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Resume
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-photo-container">
+      <img class="hero-photo-bg" src="Screenshot 2024-11-08 173106.png" alt="Brett Martin">
+      <div class="hero-photo-overlay"></div>
+    </div>
+
+    <div class="hero-left-content">
+      <div class="hero-available h-a1">
+        <div class="avail-dot"></div>
+        <span class="avail-text">Open to Senior Remote Roles</span>
+      </div>
+
+      <h1 class="hero-name h-a2">
+        <span class="fn">Brett</span>
+        <span class="ln">Martin</span>
+      </h1>
+
+      <div class="hero-rule h-a3"></div>
+
+      <p class="hero-tagline h-a4">
+        Operations leader who builds scalable systems through process engineering, SQL analytics, automation, KPI design, and disciplined operating models.
+      </p>
+
+      <div class="hero-location h-a5">Henderson, NV / Remote</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-profile-row h-a1">
+      <div class="hero-photo-portrait-wrap">
+        <img class="hero-photo-portrait" src="Screenshot 2024-11-08 173106.png" alt="Brett Martin">
+      </div>
+
+      <div>
+  <div class="hero-right-label">Senior Operations, Systems & Risk Leader</div>
+  <h2 class="hero-headline">
+    <em>Operator who builds systems.</em><br>
+    SQL, automation, KPI architecture.<br>
+    Enterprise scale across 29 states.
+  </h2>
+</div>
+
+<p class="hero-summary h-a4">
+  Senior operations and risk leader with nearly 20 years of experience built across field operations, customer service, sales, retail management, finance, and headquarters operations. Over the past 6 years at the largest residential solar installer in the US, held progressive Director and Program Manager roles with full ownership of sales compliance, underwriting operations, account management, financial operations, contract and scope-of-work controls, and partner relationships across a 29-state dealer network. Distinctive strength is combining executive leadership with hands-on technical execution across SQL, analytics, KPI architecture, automation, and AI-enabled workflow design to turn broken, manual, or high-risk functions into scalable operating systems. Rebuilt a broken compliance program from a 1,400-case backlog into a 1-business-day operation, recovered $6.75M in blocked and at-risk funding through compliance-driven resolution, and drove project defect rates from 1.4% down to 0.12% through process engineering, tooling, and systematic removal of bad actors.
+</p>
+
+    <div class="impact-block h-a5">
+      <div class="impact-row">
+        <div class="impact-number">$6.75M</div>
+        <div class="impact-label">Revenue recovered</div>
+      </div>
+      <div class="impact-row">
+        <div class="impact-number">29+</div>
+        <div class="impact-label">States managed</div>
+      </div>
+      <div class="impact-row">
+        <div class="impact-number">200+</div>
+        <div class="impact-label">People led</div>
+      </div>
+      <div class="impact-row">
+        <div class="impact-number">$110M</div>
+        <div class="impact-label">Monthly budget owned</div>
+      </div>
+    </div>
+
+    <div class="hero-cta h-a5">
+      <a href="#projects" class="btn btn-primary">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="5 12 12 5 19 12"/>
+        </svg>
+        View Work
+      </a>
+
+      <a href="Brett_Martin_Resume.pdf" download class="btn btn-ghost">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7,10 12,15 17,10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Resume
+      </a>
+
+      <a href="mailto:BrettMartinJr@outlook.com" class="btn btn-outline">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        Get in Touch
+      </a>
+    </div>
+
+    <div class="credibility h-a5">
+  Strongest in process engineering, operating model design, automation, KPI frameworks, and scaling high-volume teams without unnecessary overhead.
+</div>
+  </div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><b>Process</b> Engineering</span>
+    <span class="ticker-item"><b>Sales Compliance</b> Program Ownership</span>
+    <span class="ticker-item"><b>Underwriting</b> Operations</span>
+    <span class="ticker-item"><b>KPI</b> Framework Design</span>
+    <span class="ticker-item"><b>Dealer Network</b> Operations</span>
+    <span class="ticker-item"><b>500+</b> SQL Queries</span>
+    <span class="ticker-item"><b>AI-Enabled</b> Automation</span>
+    <span class="ticker-item"><b>Revenue</b> Recovery</span>
+    <span class="ticker-item"><b>29-State</b> Operations</span>
+
+    <span class="ticker-item"><b>Process</b> Engineering</span>
+    <span class="ticker-item"><b>Sales Compliance</b> Program Ownership</span>
+    <span class="ticker-item"><b>Underwriting</b> Operations</span>
+    <span class="ticker-item"><b>KPI</b> Framework Design</span>
+    <span class="ticker-item"><b>Dealer Network</b> Operations</span>
+    <span class="ticker-item"><b>500+</b> SQL Queries</span>
+    <span class="ticker-item"><b>AI-Enabled</b> Automation</span>
+    <span class="ticker-item"><b>Revenue</b> Recovery</span>
+    <span class="ticker-item"><b>29-State</b> Operations</span>
+  </div>
+</div>
+
+<div class="numbers">
+  <div class="num-cell reveal">
+    <div class="num-val">$<span>6.75M</span></div>
+    <div class="num-lbl">Revenue recovered<br>since Jan 2025</div>
+  </div>
+  <div class="num-cell reveal d1">
+    <div class="num-val">8<span>-10K</span></div>
+    <div class="num-lbl">Projects underwritten<br>per month</div>
+  </div>
+  <div class="num-cell reveal d2">
+    <div class="num-val">$<span>16M→$7M</span></div>
+    <div class="num-lbl">Collections balance<br>reduced in 6 months</div>
+  </div>
+  <div class="num-cell reveal d3">
+    <div class="num-val">29<span>+</span></div>
+    <div class="num-lbl">States under<br>operational management</div>
+  </div>
+  <div class="num-cell reveal d4">
+    <div class="num-val">+90<span>pts</span></div>
+    <div class="num-lbl">NPS swing from<br>-20 to above +70</div>
+  </div>
+</div>
+
+<section id="experience">
+  <span class="section-eyebrow reveal">01 / Career</span>
+  <h2 class="section-title reveal">Experience</h2>
+  <div class="section-rule reveal"></div>
+
+  <div class="exp-grid">
+    <div class="exp-row reveal">
+      <div class="exp-left">
+        <div class="exp-period">July 2024<br>Present</div>
+        <div class="exp-company">Freedom Forever</div>
+        <div class="exp-loc-tag">Temecula, CA / Remote / Henderson, NV</div>
+      </div>
+     <div class="exp-right">
+  <div class="exp-title">Program Manager, Sales Operations</div>
+  <p class="exp-desc">
+    Promoted from Director to lead cross-functional sales operations programs across a 29-state dealer network, with ownership of sales compliance, dealer administration, sales user governance, dealer partner operations, enterprise analytics, automation, and partner remediation. Focused on converting operational risk, blocked funding, and manual processes into scalable systems, measurable controls, and durable recovery programs.
+  </p>
+  <div class="exp-highlights">
+    <div class="exp-hl">Inherited a <strong>sales compliance program with a 1,400-case backlog</strong> and no active review for over 2 years, then cleared the backlog in <strong>60 days with no additional headcount</strong></div>
+    <div class="exp-hl">Established a <strong>1-business-day SLA</strong> and reduced projects with active sales compliance issues from <strong>1.4% to 0.12%</strong></div>
+    <div class="exp-hl"><strong>$5.98M recovered in 2025</strong> and <strong>$773K in the first 2 months of 2026</strong> through direct compliance resolution with customers and finance partners</div>
+    <div class="exp-hl"><strong>Built enterprise-wide analytics infrastructure</strong> with 500+ SQL queries, Power BI and Tableau dashboards, automated HTML reporting, and cross-functional operational reporting</div>
+    <div class="exp-hl"><strong>Generated six-figure annualized savings</strong> through n8n and Python automation across compliance, collections, and partner workflows</div>
+    <div class="exp-hl">Led deployment, workflow refinement, and adoption of <strong>Raya</strong>, an AI-powered CRM support system integrating ElevenLabs and Claude API</div>
+    <div class="exp-hl">Led major remediation initiatives including <strong>SafeStreets billing recovery</strong>, <strong>IL Missed NEM</strong>, <strong>Recheck identity verification</strong>, and the <strong>Sunnova swap initiative</strong></div>
+    <div class="exp-hl">Deactivated <strong>20,000+ non-compliant sales reps</strong> tied to licensing, training, and identity controls</div>
+  </div>
+  <div class="exp-tags">
+    <span class="tag">Sales Compliance</span>
+    <span class="tag">Dealer Admin</span>
+    <span class="tag">Sales User Mgmt</span>
+    <span class="tag">Dealer Partners</span>
+    <span class="tag">SQL Analytics</span>
+    <span class="tag">Automation</span>
+    <span class="tag">AI Tooling</span>
+  </div>
+</div>
+    </div>
+
+    <div class="exp-row reveal d1">
+      <div class="exp-left">
+        <div class="exp-period">November 2021<br>July 2024</div>
+        <div class="exp-company">Freedom Forever</div>
+        <div class="exp-loc-tag">Temecula, CA / Remote / Henderson, NV</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Director, Accounts &amp; Finance</div>
+        <p class="exp-desc">
+          Owned the full multi-stage underwriting program across pre-install, post-install, and post-PTO funding stages while also leading Account Management across active installations. Built the internal workflows, quality controls, escalation protocols, and exception-handling logic required to support a high-volume multi-partner funding pipeline and serve as the operational bridge between sales, field operations, finance, contract review, scope-of-work control, and pricing integrity.
+        </p>
+        <div class="exp-highlights">
+          <div class="exp-hl"><strong>8,000 to 10,000 projects/month</strong> processed across a multi-stage underwriting pipeline</div>
+          <div class="exp-hl"><strong>Co-developed underwriting criteria</strong> directly with GoodLeap, Enfin, Mosaic, Bank of America, Wells Fargo, EverBright, Sunrun, and others across 8+ finance partners</div>
+          <div class="exp-hl"><strong>Led the Account Management team</strong> responsible for project coordination, contract review, scope-of-work control, and project pricing across every active installation</div>
+          <div class="exp-hl">Recovered the direct cash collections balance from <strong>$16M to $7M in approximately 6 months</strong> by building escalation structure, outreach cadence, and accountability controls</div>
+          <div class="exp-hl">Managed approximately <strong>$110M in monthly budget</strong> in direct partnership with the CEO across underwriting funding, collections, and fintech partnership programs</div>
+          <div class="exp-hl">Contributed to the <strong>Tesla Powerwall 3 battery swap program</strong>, accelerating 500+ stalled installations through cross-functional coordination</div>
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Underwriting</span>
+          <span class="tag">Account Mgmt</span>
+          <span class="tag">Contract Review</span>
+          <span class="tag">Fintech Partnerships</span>
+          <span class="tag">Financial Ops</span>
+          <span class="tag">Budget Mgmt</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-row reveal d2">
+      <div class="exp-left">
+        <div class="exp-period">August 2019<br>November 2021</div>
+        <div class="exp-company">Freedom Forever</div>
+        <div class="exp-loc-tag">Temecula, CA / Remote / Henderson, NV</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Director, Sales Support</div>
+        <p class="exp-desc">
+          Built Freedom Forever's first structured sales support operations model from the ground up. Scaled Sales Concierge from approximately 30 to 100+ people, engineered the staffing model and SLA framework behind the growth, and created the workflow, escalation, quality, and reporting infrastructure that enabled the function to scale without proportional headcount growth.
+        </p>
+        <div class="exp-highlights">
+          <div class="exp-hl"><strong>Scaled Sales Concierge from approximately 30 to 100+</strong> while transforming performance from 60+ minute waits to 98% of contacts handled in under 2 minutes and 100% in under 5 minutes, with NPS improving from -20 to above +70 and abandonment falling to under 2%</div>
+          <div class="exp-hl"><strong>Designed workforce planning, staffing logic, and operating structure</strong> that doubled support capacity while reducing cost per contact</div>
+          <div class="exp-hl"><strong>Product-managed Lightspeed</strong>, Freedom Forever's proprietary ERP/CRM platform, from early development through full national deployment in direct partnership with engineering</div>
+          <div class="exp-hl">Built the workflow design, escalation paths, quality standards, and reporting infrastructure that became the foundation for national dealer support operations</div>
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Sales Support</span>
+          <span class="tag">Process Design</span>
+          <span class="tag">Workforce Planning</span>
+          <span class="tag">Lightspeed</span>
+          <span class="tag">NPS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-row reveal d3">
+      <div class="exp-left">
+        <div class="exp-period">2005<br>2019</div>
+        <div class="exp-company">Multiple Companies</div>
+        <div class="exp-loc-tag">Field Operations / Service / Team Leadership</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-title">Operations Leadership Foundation</div>
+        <p class="exp-desc">
+          Built the operational foundation behind later executive leadership through hands-on experience in field work, customer-facing roles, and frontline operations management. Developed practical expertise in execution, accountability, service quality, and team leadership before moving into increasingly complex roles spanning finance, compliance, underwriting, and partner operations.
+        </p>
+        <div class="exp-highlights">
+          <div class="exp-hl">Developed leadership through <strong>field, retail, and call center operations</strong></div>
+          <div class="exp-hl">Managed <strong>frontline teams and performance</strong> in fast-paced service environments</div>
+          <div class="exp-hl">Built the execution discipline that later translated into <strong>large-scale operational ownership</strong></div>
+        </div>
+        <div class="exp-tags">
+          <span class="tag">Field Ops</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Service Operations</span>
+          <span class="tag">Execution</span>
+          <span class="tag">People Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <span class="section-eyebrow reveal">02 / Featured Work</span>
+  <h2 class="section-title reveal">Selected Projects</h2>
+  <div class="section-rule reveal"></div>
+
+  <div class="projects-grid">
+    <div class="proj-card reveal">
+      <div class="proj-bar"></div>
+      <div class="proj-index">Project 01</div>
+      <div class="proj-icon-wrap">
+        <svg class="proj-icon-svg" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <div class="proj-title">Raya</div>
+      <div class="proj-sub">AI Voice Support System</div>
+      <p class="proj-desc">
+        Led deployment, workflow refinement, and adoption of an AI-powered support system integrated directly into the production CRM. Raya uses ElevenLabs voice synthesis and the Claude API to handle inbound operational support, reduce manual handling overhead, and improve consistency across operational teams.
+      </p>
+      <div class="proj-metrics">
+        <div class="pm">ElevenLabs voice synthesis integrated into a live CRM environment</div>
+        <div class="pm">Claude API driving intelligent routing and response generation</div>
+        <div class="pm">Rolled out across multi-team operations with cross-functional adoption programs</div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal d1">
+      <div class="proj-bar"></div>
+      <div class="proj-index">Project 02</div>
+      <div class="proj-icon-wrap">
+        <svg class="proj-icon-svg" viewBox="0 0 24 24">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <div class="proj-title">Revenue Recovery Program</div>
+      <div class="proj-sub">$6.75M Recovered / Compliance Resolution</div>
+      <p class="proj-desc">
+        Designed and ran an end-to-end compliance recovery engine focused on blocked and at-risk funding. Built the workflows, escalation paths, dispute resolution processes, reporting controls, and partner coordination model that turned compliance losses into a sustained recovery program.
+      </p>
+      <div class="proj-metrics">
+        <div class="pm">$5.98M recovered in 2025 through compliance-driven funding resolution</div>
+        <div class="pm">$773K recovered in the first two months of 2026</div>
+        <div class="pm">Direct remediation with customers and finance partners to unlock or recoup blocked funding</div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal d2">
+      <div class="proj-bar"></div>
+      <div class="proj-index">Project 03</div>
+      <div class="proj-icon-wrap">
+        <svg class="proj-icon-svg" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+      </div>
+      <div class="proj-title">Underwriting Program</div>
+      <div class="proj-sub">8 to 10K Projects/Month / 8+ Finance Partners</div>
+      <p class="proj-desc">
+        Owned the full multi-stage underwriting program across pre-install, post-install, and post-PTO funding stages. Co-developed underwriting criteria directly with major finance partners, built internal quality controls and exception-handling workflows, and served as final escalation point for failed submissions and funding remediation.
+      </p>
+      <div class="proj-metrics">
+        <div class="pm">8,000 to 10,000 projects/month processed through the pipeline</div>
+        <div class="pm">8+ finance partners with varying standards, approval criteria, and remediation paths</div>
+        <div class="pm">Exception-handling workflows built to support a high-volume multi-partner funding model</div>
+      </div>
+    </div>
+
+    <div class="proj-card reveal d3">
+      <div class="proj-bar"></div>
+      <div class="proj-index">Project 04</div>
+      <div class="proj-icon-wrap">
+        <svg class="proj-icon-svg" viewBox="0 0 24 24">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+      </div>
+      <div class="proj-title">Sales Compliance Operating System</div>
+      <div class="proj-sub">Process Design / KPI Framework / Operating Model</div>
+      <p class="proj-desc">
+        Built the company's structured sales compliance operating system across dealer admin, sales user controls, dealer partner governance, escalations, KPI tracking, SLA enforcement, identity controls, analytics, and reporting infrastructure. Turned an unmanaged function into a measurable, scalable control environment.
+      </p>
+      <div class="proj-metrics">
+        <div class="pm">1,400-case backlog cleared in 60 days with no additional headcount</div>
+        <div class="pm">1-business-day SLA established and sustained across a 29-state dealer network</div>
+        <div class="pm">Rate of projects with active sales compliance issues reduced from 1.4% to 0.12%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <span class="section-eyebrow reveal">03 / Skills</span>
+  <h2 class="section-title reveal">Capabilities</h2>
+  <div class="section-rule reveal"></div>
+
+  <div class="skills-grid">
+    <div class="skill-col reveal">
+      <div class="skill-col-title">Risk, Compliance &amp; Controls</div>
+      <ul class="skill-list">
+        <li>Sales Compliance Program Ownership</li>
+        <li>Underwriting Program Ownership</li>
+        <li>Compliance Risk Controls</li>
+        <li>Operational Risk Management</li>
+        <li>Identity Verification Systems</li>
+        <li>Financial Loss Prevention</li>
+        <li>Audit Readiness</li>
+        <li>Control Environment Design</li>
+        <li>Escalation Management</li>
+      </ul>
+    </div>
+
+    <div class="skill-col reveal d1">
+      <div class="skill-col-title">Process Engineering &amp; Operating Design</div>
+      <ul class="skill-list">
+        <li>Process Engineering</li>
+        <li>Workflow Redesign</li>
+        <li>KPI Framework Design</li>
+        <li>SLA Design &amp; Enforcement</li>
+        <li>Staffing Model Development</li>
+        <li>Workforce Planning</li>
+        <li>Operating Model Creation</li>
+        <li>Output per Headcount Optimization</li>
+        <li>Cross-Functional Process Simplification</li>
+      </ul>
+    </div>
+
+    <div class="skill-col reveal d2">
+      <div class="skill-col-title">Technical Systems, Data &amp; Automation</div>
+      <ul class="skill-list">
+        <li>SQL / MySQL (Advanced)</li>
+        <li>Power BI &amp; Dashboard Architecture</li>
+        <li>Tableau &amp; Automated HTML Reporting</li>
+        <li>n8n Workflow Automation</li>
+        <li>Python Operations Automation</li>
+        <li>Claude API Integration</li>
+        <li>ElevenLabs Voice Synthesis</li>
+        <li>LLM Workflow Design</li>
+        <li>Zendesk, Jira, Confluence</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-wrap">
+    <span class="contact-label reveal">04 / Let's Connect</span>
+    <h2 class="contact-h reveal">Open to the<br><em>right role.</em></h2>
+    <p class="contact-body reveal">
+      Targeting senior roles in operations leadership, process engineering, program management, underwriting and risk operations, compliance systems, financial operations, and AI-enabled workflow design. Remote preferred. Henderson, NV.
+    </p>
+
+    <div class="contact-row reveal">
+      <a href="mailto:BrettMartinJr@outlook.com" class="c-btn primary">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        Email Brett
+      </a>
+
+      <a href="https://linkedin.com/in/brettmartin1990" target="_blank" rel="noreferrer" class="c-btn ghost">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        LinkedIn
+      </a>
+
+      <a href="tel:9514489007" class="c-btn ghost">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l1.27-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        (951) 448-9007
+      </a>
+
+      <a href="Brett_Martin_Resume.pdf" download class="c-btn ghost">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7,10 12,15 17,10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Resume PDF
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-l">Brett Martin / Operations, Systems &amp; Risk Leader</div>
+  <div class="foot-r">Henderson, NV / Open to Remote</div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+
+  /* Custom cursor */
+  const canUseFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const cdot = document.getElementById('cdot');
+  const cring = document.getElementById('cring');
+
+  if (canUseFinePointer && cdot && cring) {
+    document.documentElement.classList.add('custom-cursor-enabled');
+
+    let mx = window.innerWidth / 2;
+    let my = window.innerHeight / 2;
+    let rx = mx;
+    let ry = my;
+
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX;
+      my = e.clientY;
+      cdot.style.left = mx + 'px';
+      cdot.style.top = my + 'px';
+      cdot.style.opacity = '1';
+      cring.style.opacity = '.42';
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () {
+      cdot.style.opacity = '0';
+      cring.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', function () {
+      cdot.style.opacity = '1';
+      cring.style.opacity = '.42';
+    });
+
+    function animateCursor() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cring.style.left = rx + 'px';
+      cring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll('a, button').forEach(function (el) {
+      el.addEventListener('mouseenter', function () {
+        cdot.style.width = '5px';
+        cdot.style.height = '5px';
+        cring.style.width = '48px';
+        cring.style.height = '48px';
+        cring.style.opacity = '.72';
+      });
+      el.addEventListener('mouseleave', function () {
+        cdot.style.width = '8px';
+        cdot.style.height = '8px';
+        cring.style.width = '32px';
+        cring.style.height = '32px';
+        cring.style.opacity = '.42';
+      });
+    });
+  }
+
+  /* Nav scroll state */
+  const nav = document.getElementById('nav');
+  function onScroll() {
+    if (!nav) return;
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Reveal animations */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    const obs = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    revealEls.forEach(function (el) {
+      obs.observe(el);
+    });
+  } else {
+    revealEls.forEach(function (el) {
+      el.classList.add('visible');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
