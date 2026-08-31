@@ -602,20 +602,21 @@ section { scroll-margin-top: 90px; }
   margin-bottom: 22px;
 }
 .exp-hl {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  display: block;
+  position: relative;
+  padding-left: 32px;
   font-size: .83rem;
   color: rgba(255,255,255,.56);
   line-height: 1.55;
 }
 .exp-hl::before {
   content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
   width: 20px;
   height: 1px;
   background: var(--blue);
-  flex-shrink: 0;
-  margin-top: 10px;
 }
 .exp-hl strong {
   color: rgba(255,255,255,.82);
@@ -1376,7 +1377,7 @@ html.js .reveal.visible {
     <div class="num-lbl">Collections balance<br>reduced in 6 months</div>
   </div>
   <div class="num-cell reveal d3">
-    <div class="num-val">41<span>+</span></div>
+    <div class="num-val">29<span>+</span></div>
     <div class="num-lbl">States under<br>operational management</div>
   </div>
   <div class="num-cell reveal d4">
